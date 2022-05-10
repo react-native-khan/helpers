@@ -1,0 +1,21 @@
+{
+  "name": "@react-native-khan/helpers",
+  "version": "0.0.1",
+  "description": "Yet another ~~unmaintained~~ project",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/react-native-khan/helpers.git"
+  },
+  "author": "Farkhan Azmi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://https://github.com/react-native-khan/helpers/issues"
+  },
+  "homepage": "https://https://github.com/react-native-khan/helpers#readme",
+  "scripts": {},
+  "keywords": [
+    "collection",
+    "helpers"
+  ]
+}
