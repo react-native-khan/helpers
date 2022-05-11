@@ -1,6 +1,6 @@
 {
   "name": "@react-native-khan/helpers",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Yet another ~~unmaintained~~ project",
   "main": "index.js",
   "repository": {
@@ -13,12 +13,15 @@
     "url": "https://https://github.com/react-native-khan/helpers/issues"
   },
   "homepage": "https://https://github.com/react-native-khan/helpers#readme",
-  "scripts": {},
+  "scripts": {
+    "update:rnk:helpers":"yarn add @react-navigation/native axios"
+  },
   "keywords": [
     "collection",
     "helpers"
   ],
   "dependencies": {
-    "axios": "latest"
+    "@react-navigation/native": "^6.0.10",
+    "axios": "^0.27.2"
   }
 }
