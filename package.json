@@ -19,10 +19,6 @@
     "helpers"
   ],
   "dependencies": {
-    "@react-native-async-storage/async-storage": "latest",
-    "@react-navigation/native": "latest",
-    "axios": "latest",
-    "react-native-device-info": "latest",
-    "react-native-snackbar": "latest"
+    "axios": "latest"
   }
 }
