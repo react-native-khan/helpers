@@ -17,5 +17,8 @@
   "keywords": [
     "collection",
     "helpers"
-  ]
+  ],
+  "dependencies": {
+    "react-native-snackbar": "^2.4.0"
+  }
 }
