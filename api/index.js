@@ -23,10 +23,10 @@ class Request {
 
     const wrapperLog = (response, error = false) => {
       logger(
-        `\n🚀 Url::${url}\n`,
-        `🗿 Body::${JSON.stringify(body||{})}\n`,
-        `🚧 Option::${JSON.stringify(options)}\n`,
-        `${error ? '💀' : '🦄'} Response::${JSON.stringify(response)}\n`,
+        `\n🚀 Url::${url}`,
+        `\n🗿 Body::${JSON.stringify(body||{})}`,
+        `\n🚧 Option::${JSON.stringify(options)}`,
+        `\n${error ? '💀' : '🦄'} Response::${JSON.stringify(response)}`,
       );
     };
 
