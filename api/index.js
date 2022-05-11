@@ -1,58 +1,55 @@
-import axios from "axios";
-import { BASE_URL } from "@env";
-import {
-  getItem,
-  clearStorage,
-  navigator,
-  logTelegram,
-  log,
-} from "../helpers";
+import {getItem, logger} from '@react-native-khan/helpers';
 
-export const request = async (options) => {
-  log(`🔥 Request::${JSON.stringify(options)}`);
-  const token = await getItem('token');
-  const config = {
-    baseURL: options?.base || BASE_URL,
-    headers: {
-      Accept: "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }),
-      // ...(options?.data?.type === 'file' && {
-      //   'Content-Type': 'multipart/form-data',
-      // }),
-    },
-  };
-  const client = axios.create(config);
-  log(`🤖 Config::${JSON.stringify(config)}`);
-  const onSuccess = (res) => {
-    !options?.noLogTelegram &&
-      logTelegram(
-        `🔥 Request::${JSON.stringify(options)}`,
-        `🤖 Config::${JSON.stringify(config)}`,
-        `🌈 Response::${JSON.stringify(res?.data || res)}`
-      );
-    log(`🌈 Response::${JSON.stringify(res?.data || res)}`);
-    return Promise.resolve(res?.data || res);
+class Request {
+  successHandler = () => {};
+  errorHandler = () => {};
+
+  setHandler = handler => {
+    this.errorHandler = handler?.errorHandler;
+    this.successHandler = handler?.successHandler;
   };
 
-  const onError = (error) => {
-    if (error?.response?.status === 401) {
-      clearStorage();
-      navigator.resetTo("login");
-    }
-    !options?.noLogTelegram &&
-      logTelegram(
-        `🔥 Request::${JSON.stringify(options)}`,
-        `🤖 Config::${JSON.stringify(config)}`,
-        `💀 Response::${JSON.stringify(
-          error?.response?.data || error?.response || error
-        )}`
+  create = async ({url, body, headers, method, analytics = true}) => {
+    const token = await getItem('token');
+    const options = {
+      method,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        ...(token && {Authorization: `Bearer ${token}`}),
+        ...(headers && headers),
+      },
+    };
+
+    const wrapperLog = (response, error = false) => {
+      logger(
+        `\n🚀 Url::${url}\n`,
+        `🗿 Body::${JSON.stringify(body)}\n`,
+        `🚧 Option::${JSON.stringify(options)}\n`,
+        `${error ? '💀' : '🦄'} Response::${JSON.stringify(response)}\n`,
       );
-    log(
-      `💀 Response::${JSON.stringify(
-        error?.response?.data || error?.response || error
-      )}`
-    );
-    return Promise.reject(error?.response?.data || error?.response || error);
+    };
+
+    const onSuccess = res => {
+      this.successHandler(res);
+      const response = res?.data || res;
+      wrapperLog(response);
+      return Promise.resolve(response);
+    };
+
+    const onError = err => {
+      this.errorHandler(err);
+      const response = err?.response?.data || err?.response || err;
+      wrapperLog(response, true);
+      return Promise.reject(response);
+    };
+
+    return fetch(url, {...options, body: JSON.stringify(body)})
+      .then(async resp => {
+        let res = await resp.json();
+        resp.ok ? onSuccess(res) : onError(res);
+      })
+      .catch(err => onError(err));
   };
-  return client(options).then(onSuccess).catch(onError);
-};
+}
+export default Request;
