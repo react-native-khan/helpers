@@ -1,6 +1,6 @@
 {
   "name": "@react-native-khan/helpers",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Yet another ~~unmaintained~~ project",
   "main": "index.js",
   "repository": {
@@ -14,7 +14,7 @@
   },
   "homepage": "https://https://github.com/react-native-khan/helpers#readme",
   "scripts": {
-    "upd:rnk:helpers":"yarn add @react-navigation/native axios react-redux redux redux-persist redux-thunk @reduxjs/toolkit"
+    "upd:rnk:helpers":"yarn add @react-navigation/native react-redux redux redux-persist redux-thunk @reduxjs/toolkit"
   },
   "keywords": [
     "collection",
@@ -22,7 +22,6 @@
   ],
   "dependencies": {
     "@react-navigation/native": "^6.0.10",
-    "axios": "^0.27.2",
     "@reduxjs/toolkit": "^1.8.1",
     "react-redux": "^8.0.1",
     "redux": "^4.2.0",
