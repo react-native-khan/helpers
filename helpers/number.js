@@ -1,5 +1,5 @@
-export const currency = (num, prefix = "Rp") => {
-  return `${prefix}. ${
+export const currency = (num, prefix = "Rp",separator=". ") => {
+  return `${prefix}${separator}${
     !isNaN(num)
       ? Number(num)
           .toFixed(0)
