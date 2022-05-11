@@ -1,10 +1,10 @@
 import {BEGIN, END} from './type';
 
-export const beginLoading = () => dispatch => {
+export const begin = () => dispatch => {
   dispatch({type: BEGIN});
 };
 
-export const endLoading = () => dispatch => {
+export const end = () => dispatch => {
   dispatch({type: END});
 };
 
