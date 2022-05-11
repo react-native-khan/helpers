@@ -22,7 +22,7 @@ class Request {
     };
 
     const wrapperLog = (response, error = false) => {
-      logger(
+      analytics && error && logger(
         `\n🚀 Url::${url}`,
         `\n🗿 Body::${JSON.stringify(body||{})}`,
         `\n🚧 Option::${JSON.stringify(options)}`,
