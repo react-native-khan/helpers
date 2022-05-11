@@ -9,7 +9,7 @@ class Request {
     this.successHandler = handler?.successHandler;
   };
 
-  create = async ({url, body, headers, method, analytics = true}) => {
+  create = async ({url, body, headers, method}) => {
     const token = await getItem('token');
     const options = {
       method,
@@ -21,14 +21,13 @@ class Request {
       },
     };
 
-    const wrapperLog = (response, error = false) => {
-      analytics && error && logger(
+    const wrapperLog = (response, error = false) =>
+      logger(
         `\n🚀 Url::${url}`,
-        `\n🗿 Body::${JSON.stringify(body||{})}`,
+        `\n🗿 Body::${JSON.stringify(body || {})}`,
         `\n🚧 Option::${JSON.stringify(options)}`,
         `\n${error ? '💀' : '🦄'} Response::${JSON.stringify(response)}`,
       );
-    };
 
     const onSuccess = res => {
       this.successHandler(res);
