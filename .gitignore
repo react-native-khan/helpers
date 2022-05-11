@@ -10,3 +10,4 @@ dist
 # Dependency directory
 node_modules
 .DS_Store
+yarn.lock
