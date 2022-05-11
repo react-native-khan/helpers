@@ -6,15 +6,12 @@ Yet another ~~unmaintained~~ project
 
 #### Dependency
 
-- @react-native-async-storage
+- @react-native-async-storage/async-storage
 - react-native-snackbar
-- @react-navigation/native
 - react-native-device-info
-- axios
 
 ```
-yarn add @react-native-async-storage react-native-snackbar 
-@react-navigation/native react-native-device-info axios
+yarn add @react-native-async-storage/async-storage react-native-snackbar react-native-device-info
 ```
 
 #### .env

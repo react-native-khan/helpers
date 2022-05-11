@@ -1,4 +1,4 @@
-export const rupiah = (num, prefix = "Rp") => {
+export const currency = (num, prefix = "Rp") => {
   return `${prefix}. ${
     !isNaN(num)
       ? Number(num)
