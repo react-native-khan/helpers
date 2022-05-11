@@ -6,7 +6,7 @@ import {
   navigator,
   logTelegram,
   log,
-} from "react-native-khan/helpers";
+} from "../helpers";
 
 export const request = async (options) => {
   log(`🔥 Request::${JSON.stringify(options)}`);
