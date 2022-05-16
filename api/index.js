@@ -22,7 +22,7 @@ class Request {
         },
       };
 
-      const wrapperLog = (response, error = false) =>
+      const wrapperLog = ({ response, error = false }) =>
         logger(
           `\n🚀 Url::${url}`,
           `\n🗿 Body::${JSON.stringify(body || {})}`,
@@ -33,14 +33,14 @@ class Request {
       const onSuccess = (res) => {
         this.successHandler(res);
         const response = res?.data || res;
-        wrapperLog(response);
+        wrapperLog({ response });
         resolve(response);
       };
 
       const onError = (err) => {
         this.errorHandler(err);
         const response = err?.response?.data || err?.response || err;
-        wrapperLog(response);
+        wrapperLog({ response, error: true });
         reject(response);
       };
 
