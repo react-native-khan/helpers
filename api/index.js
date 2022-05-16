@@ -30,18 +30,10 @@ class Request {
           `\n${error ? "💀" : "🦄"} Response::${JSON.stringify(response)}`
         );
 
-      const onSuccess = (res) => {
-        this.successHandler(res);
-        const response = res?.data || res;
-        wrapperLog({ response });
-        resolve(response);
-      };
-
-      const onError = (err) => {
-        this.errorHandler(err);
-        const response = err?.response?.data || err?.response || err;
-        wrapperLog({ response, error: true });
-        reject(response);
+      const on = ({ response, error = false }) => {
+        error ? this.errorHandler(response) : this.successHandler(response);
+        wrapperLog({ response, error });
+        error ? reject(response) : resolve(response);
       };
 
       try {
@@ -50,9 +42,13 @@ class Request {
           body: JSON.stringify(body),
         });
         let res = await response.json();
-        response.ok ? onSuccess(res) : onError(res);
+        res = {
+          ...res,
+          ...{ http: { code: response.status, status: response.ok } },
+        };
+        on({ response: res, error: !response.ok });
       } catch (error) {
-        onError(error);
+        on({ response: error, error: true });
       }
     });
 }
