@@ -9,7 +9,7 @@ class Request {
     this.successHandler = handler?.successHandler;
   };
 
-  create = ({ url, body, headers, method }) =>
+  create = ({ url, body, headers, method, disableLog = false }) =>
     new Promise(async (resolve, reject) => {
       const token = await getItem("token").catch(() => false);
       const options = {
@@ -32,7 +32,7 @@ class Request {
 
       const on = ({ response, error = false }) => {
         error ? this.errorHandler(response) : this.successHandler(response);
-        wrapperLog({ response, error });
+        !error && !disableLog && wrapperLog({ response, error });
         error ? reject(response) : resolve(response);
       };
 
