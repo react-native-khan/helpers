@@ -37,8 +37,8 @@ class Request {
         );
 
       const on = ({ response, error = false }) => {
+        (error || !disableLog) && wrapperLog({ response, error });
         error ? this.errorHandler(response) : this.successHandler(response);
-        !error && !disableLog && wrapperLog({ response, error });
         error ? reject(response) : resolve(response);
       };
 
@@ -54,7 +54,6 @@ class Request {
         };
         on({ response: res, error: !response.ok });
       } catch (error) {
-        console.log("error", JSON.stringify(error));
         on({ response: error, error: true });
       }
     });
