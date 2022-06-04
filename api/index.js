@@ -26,12 +26,11 @@ class Request {
           ...(headers && headers),
         },
       };
-
       const wrapperLog = ({ response, error = false }) =>
         logger(
           `\n🚀 Url::${url}`,
           !methodWithoutBody.includes(method)
-            ? `\n🗿 Body::${JSON.stringify(body || {})}\n`
+            ? `\n🗿 Body::${JSON.stringify(payload || {})}\n`
             : "",
           `🚧 Option::${JSON.stringify(options)}`,
           `\n${error ? "💀" : "🦄"} Response::${JSON.stringify(response)}`
