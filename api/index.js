@@ -21,7 +21,9 @@ class Request {
         method,
         headers: {
           Accept: "application/json",
-          "Content-Type": "multipart/form-data",
+          "Content-Type": methodWithoutBody.includes(method)
+            ? "application/json"
+            : "multipart/form-data",
           ...(token && { Authorization: `Bearer ${token}` }),
           ...(headers && headers),
         },
@@ -30,9 +32,9 @@ class Request {
         logger(
           `\n🚀 Url::${url}`,
           !methodWithoutBody.includes(method)
-            ? `\n🗿 Body::${JSON.stringify(payload || {})}\n`
+            ? `\n🗿 Body::${JSON.stringify(payload || {})}`
             : "",
-          `🚧 Option::${JSON.stringify(options)}`,
+          `\n🚧 Option::${JSON.stringify(options)}`,
           `\n${error ? "💀" : "🦄"} Response::${JSON.stringify(response)}`
         );
 
